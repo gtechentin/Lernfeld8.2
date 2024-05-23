@@ -1,0 +1,37 @@
+SELECT * FROM person WHERE ort='Berlin';
++----------------+----------+---------+-------------------+--------+-------+-------------+--------------+
+| personennummer | nachname | vorname | strasse           | ort    | plz   | land        | geburtsdatum |
++----------------+----------+---------+-------------------+--------+-------+-------------+--------------+
+|              3 | Wojack   | Albert  | Westendstrasse 92 | Berlin | 12234 | Deutschland | 1955-06-15   |
++----------------+----------+---------+-------------------+--------+-------+-------------+--------------+
+
+SELECT vorname,nachname,ort FROM person WHERE ort='Berlin' OR ort='Klagenfurt';
++---------+----------+------------+
+| vorname | nachname | ort        |
++---------+----------+------------+
+| Albert  | Wojack   | Berlin     |
+| Paula   | David    | Klagenfurt |
+| Joseph  | Hardiff  | Klagenfurt |
++---------+----------+------------+
+
+SELECT vorname,nachname,ort FROM person WHERE ort!='Berlin';
++---------+---------------+----------------+
+| vorname | nachname      | ort            |
++---------+---------------+----------------+
+| Ulrich  | Blotzek       | Arnsberg       |
+| Peter   | Schatter      | Augsburg       |
+| Veera   | Virtanen      | Espoo          |
+| Ahvo    | Hämäläinen    | Forssa         |
+| Fenna   | Huisman       | Almere         |
+| Lieke   | Prins         | Bergen op Zoom |
+| Paula   | David         | Klagenfurt     |
+| Joseph  | Hardiff       | Klagenfurt     |
++---------+---------------+----------------+
+
+SELECT nachname,ort,geburtsdatum FROM person WHERE land='Deutschland' AND geburtsdatum>'1960-06-01';
++----------+----------+--------------+
+| nachname | ort      | geburtsdatum |
++----------+----------+--------------+
+| Blotzek  | Arnsberg | 1960-10-05   |
+| Schatter | Augsburg | 1980-01-01   |
++----------+----------+--------------+

@@ -1,0 +1,43 @@
+SELECT CONCAT(vorname, ' ', nachname) AS Name, CONCAT(plz, ' ', ort) AS Anschrift FROM person;
++--------------------+---------------------+
+| Name               | Anschrift           |
++--------------------+---------------------+
+| Ulrich Blotzek     | 59823 Arnsberg      |
+| Peter Schatter     | 86179 Augsburg      |
+| Albert Wojack      | 12234 Berlin        |
+| Veera Virtanen     | 2150 Espoo          |
+| Ahvo Hämäläinen    | 30100 Forssa        |
+| Fenna Huisman      | 1315 Almere         |
+| Lieke Prins        | 4600 Bergen op Zoom |
+| Paula David        | 9020 Klagenfurt     |
+| Joseph Hardiff     | 9200 Klagenfurt     |
++--------------------+---------------------+
+
+SELECT DISTINCT ort AS Ortsnamen, LENGTH(ort) AS Orrtsnamnlänge FROM person;
++----------------+-----------------+
+| Ortsnamen      | Orrtsnamnlänge  |
++----------------+-----------------+
+| Arnsberg       |               8 |
+| Augsburg       |               8 |
+| Berlin         |               6 |
+| Espoo          |               5 |
+| Forssa         |               6 |
+| Almere         |               6 |
+| Bergen op Zoom |              14 |
+| Klagenfurt     |              10 |
++----------------+-----------------+
+
+SELECT TIMESTAMPDIFF( YEAR, geburtsdatum,  CURDATE()) as Lebensalter, vorname, nachname, geburtsdatum FROM person;
++-------------+---------+---------------+--------------+
+| Lebensalter | vorname | nachname      | geburtsdatum |
++-------------+---------+---------------+--------------+
+|          63 | Ulrich  | Blotzek       | 1960-10-05   |
+|          44 | Peter   | Schatter      | 1980-01-01   |
+|          68 | Albert  | Wojack        | 1955-06-15   |
+|          31 | Veera   | Virtanen      | 1992-12-30   |
+|          46 | Ahvo    | Hämäläinen    | 1977-04-23   |
+|          52 | Fenna   | Huisman       | 1971-08-17   |
+|          36 | Lieke   | Prins         | 1987-05-08   |
+|          54 | Paula   | David         | 1970-01-21   |
+|          61 | Joseph  | Hardiff       | 1962-08-09   |
++-------------+---------+---------------+--------------+

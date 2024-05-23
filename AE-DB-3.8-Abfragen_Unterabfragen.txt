@@ -1,0 +1,91 @@
+SELECT a.artikelname, h.* FROM artikel AS a, hersteller AS h WHERE a.herstellernummer = h.herstellernummer ORDER BY a.artikelname;
++-------------+------------------+-----------------+---------+
+| artikelname | herstellernummer | herstellername  | land    |
++-------------+------------------+-----------------+---------+
+| Drucker     |               50 | Hewlett Packard | USA     |
+| Festplatte  |               30 | Maxtor          | USA     |
+| Maus        |               10 | Logitech        | Schweiz |
+| Monitor     |               20 | SONY            | Japan   |
+| Tastatur    |               10 | Logitech        | Schweiz |
++-------------+------------------+-----------------+---------+
+
+SELECT a.artikelname, a.preis, h.herstellername 
+FROM artikel AS a 
+INNER JOIN hersteller AS h ON a.herstellernummer = h.herstellernummer 
+WHERE a.preis > 200;
++-------------+--------+-----------------+
+| artikelname | preis  | herstellername  |
++-------------+--------+-----------------+
+| Drucker     | 300.00 | Hewlett Packard |
+| Festplatte  | 400.00 | Maxtor          |
+| Monitor     | 500.00 | SONY            |
++-------------+--------+-----------------+
+
+
+SELECT b.bestellnummer, p.nachname, p.nachname, b.artikelanzahl, b.bestellsumme 
+FROM bestellung as b 
+INNER JOIN person AS p ON b.kundennummer = p.personennummer;
++---------------+---------------+---------------+---------------+--------------+
+| bestellnummer | nachname      | nachname      | artikelanzahl | bestellsumme |
++---------------+---------------+---------------+---------------+--------------+
+|             1 | Virtanen      | Virtanen      |             2 |        20.00 |
+|             2 | Blotzek       | Blotzek       |             1 |        20.00 |
+|             3 | Schatter      | Schatter      |             3 |        30.00 |
+|             4 | Wojack        | Wojack        |             1 |       300.00 |
+|             5 | Hämäläinen    | Hämäläinen    |             5 |      2500.00 |
++---------------+---------------+---------------+---------------+--------------+
+
+SELECT b.bestellnummer, p.vorname, p.nachname, a.artikelname, b.artikelanzahl, a.preis 
+FROM bestellung as b 
+INNER JOIN person AS p ON b.kundennummer = p.personennummer 
+INNER JOIN artikel AS a ON b.artikelnummer = a.artikelnummer 
+WHERE b.artikelanzahl > 2;
++---------------+---------+---------------+-------------+---------------+--------+
+| bestellnummer | vorname | nachname      | artikelname | artikelanzahl | preis  |
++---------------+---------+---------------+-------------+---------------+--------+
+|             3 | Peter   | Schatter      | Maus        |             3 |  10.00 |
+|             5 | Ahvo    | Hämäläinen    | Monitor     |             5 | 500.00 |
++---------------+---------+---------------+-------------+---------------+--------+
+
+SELECT p.nachname, p.vorname, a.artikelname, h.herstellername, h.land 
+FROM bestellung AS b 
+INNERJOIN artikel AS a ON b.artikelnummer = a. artikelnummer 
+INNER JOIN person AS p ON p.personennummer = b.kundennummer 
+INNER JOIN hersteller AS h ON a.herstellernummer = h.herstellernummer;
++---------------+---------+-------------+-----------------+---------+
+| nachname      | vorname | artikelname | herstellername  | land    |
++---------------+---------+-------------+-----------------+---------+
+| Virtanen      | Veera   | Maus        | Logitech        | Schweiz |
+| Blotzek       | Ulrich  | Tastatur    | Logitech        | Schweiz |
+| Schatter      | Peter   | Maus        | Logitech        | Schweiz |
+| Wojack        | Albert  | Drucker     | Hewlett Packard | USA     |
+| Hämäläinen    | Ahvo    | Monitor     | SONY            | Japan   |
++---------------+---------+-------------+-----------------+---------+
+
+SELECT p.nachname, p.vorname, p.ort, a.artikelname, h.land 
+FROM bestellung AS b 
+INNER JOIN artikel AS a ON b.artikelnummer = a. artikelnummer 
+INNER JOIN person AS p ON p.personennummer = b.kundennummer 
+INNER JOIN hersteller AS h ON a.herstellernummer = h.herstellernummer;
++---------------+---------+----------+-------------+---------+
+| nachname      | vorname | ort      | artikelname | land    |
++---------------+---------+----------+-------------+---------+
+| Virtanen      | Veera   | Espoo    | Maus        | Schweiz |
+| Blotzek       | Ulrich  | Arnsberg | Tastatur    | Schweiz |
+| Schatter      | Peter   | Augsburg | Maus        | Schweiz |
+| Wojack        | Albert  | Berlin   | Drucker     | USA     |
+| Hämäläinen    | Ahvo    | Forssa   | Monitor     | Japan   |
++---------------+---------+----------+-------------+---------+
+
+SELECT p.* FROM bestellung AS b 
+INNER JOIN artikel AS a ON b.artikelnummer = a. artikelnummer 
+INNER JOIN person AS p ON p.personennummer = b.kundennummer 
+INNER JOIN hersteller AS h ON a.herstellernummer = h.herstellernummer 
+WHERE h.herstellername = 'Logitech';
++----------------+----------+---------+--------------------+----------+-------+-------------+--------------+
+| personennummer | nachname | vorname | strasse            | ort      | plz   | land        | geburtsdatum |
++----------------+----------+---------+--------------------+----------+-------+-------------+--------------+
+|              4 | Virtanen | Veera   | Oyi Keilasatama 21 | Espoo    |  2150 | Finnland    | 1992-12-30   |
+|              2 | Schatter | Peter   | Försterstrasse 56  | Augsburg | 86179 | Deutschland | 1980-01-01   |
+|              1 | Blotzek  | Ulrich  | Großkopf 4         | Arnsberg | 59823 | Deutschland | 1960-10-05   |
++----------------+----------+---------+--------------------+----------+-------+-------------+--------------+

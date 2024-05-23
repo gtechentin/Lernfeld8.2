@@ -1,0 +1,53 @@
+SELECT herstellernummer,artikelname,preis FROM artikel WHERE herstellernummer=10 OR herstellernummer=30 OR herstellernummer=50;
++------------------+-------------+--------+
+| herstellernummer | artikelname | preis  |
++------------------+-------------+--------+
+|               10 | Maus        |  10.00 |
+|               10 | Tastatur    |  20.00 |
+|               30 | Festplatte  | 400.00 |
+|               50 | Drucker     | 300.00 |
++------------------+-------------+--------+
+
+SELECT artikelname,preis FROM artikel WHERE preis BETWEEN 200 AND 400;
++-------------+--------+
+| artikelname | preis  |
++-------------+--------+
+| Drucker     | 300.00 |
+| Festplatte  | 400.00 |
++-------------+--------+
+
+SELECT artikelname,preis FROM artikel WHERE artikelname LIKE 'M%';
++-------------+--------+
+| artikelname | preis  |
++-------------+--------+
+| Maus        |  10.00 |
+| Monitor     | 500.00 |
++-------------+--------+
+
+
+SELECT herstellername, land FROM hersteller;
++-----------------+-------------+
+| herstellername  | land        |
++-----------------+-------------+
+| Logitech        | Schweiz     |
+| SONY            | Japan       |
+| Maxtor          | USA         |
+| Medion          | Deutschland |
+| Hewlett Packard | USA         |
++-----------------+-------------+
+
+SELECT herstellername, land FROM hersteller WHERE herstellername LIKE 'M%' AND land!='Japan';
++----------------+-------------+
+| herstellername | land        |
++----------------+-------------+
+| Maxtor         | USA         |
+| Medion         | Deutschland |
++----------------+-------------+
+
+SELECT herstellername, land FROM hersteller WHERE herstellername NOT LIKE 'M%' AND land='Deutschland' OR land='USA';
++-----------------+------+
+| herstellername  | land |
++-----------------+------+
+| Maxtor          | USA  |
+| Hewlett Packard | USA  |
++-----------------+------+
